@@ -11,3 +11,11 @@ add_btn = ReplyKeyboardMarkup(
         KeyboardButton(text="LEVEL4️⃣")
     ]
 ], resize_keyboard=True)
+
+add_btns = ReplyKeyboardMarkup(
+    keyboard=[
+    [
+        KeyboardButton(text="Stop⛔")
+    ]
+    ],resize_keyboard=True
+)

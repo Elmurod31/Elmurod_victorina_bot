@@ -1,17 +1,50 @@
+import os
 import random
 
-from aiogram import types, Router
+from aiogram import Router, F
+from aiogram.filters import CommandStart
 from aiogram.fsm.context import FSMContext
+from aiogram.types import Message, FSInputFile
 
-from bot.states import LevelState
+from keyboard import add_btn, add_btns
 
 handlers_router = Router()
 
-@handlers_router.message(LevelState.level)
-async def lvl_handler(message: types.Message, state: FSMContext):
-    if message.text == "LEVEL1️⃣":
-        question = f"{random.randrange(1, 11)} {random.choice(['+', '-', '*'])} {random.randrange(1, 11)}"
-        answer = eval(question)
-        await state.update_data(answer=answer, level=message.text, true=0, false=0)
-        await message.answer(f"SAVOL : {question} = ?")
-        await state.set_state(LevelState.answer)
+
+
+@handlers_router.message(CommandStart())
+async def command_start_handler(message: Message):
+    img_path = os.path.join(os.path.dirname(__file__), "images", "img.png")
+    img = FSInputFile(img_path)
+    full_name = f"{message.from_user.first_name} {message.from_user.last_name}"
+    await message.answer_photo(img, caption=f"Hush kelibsiz {full_name} blag'on sizga nechta savollar berib bilimingizni tekshirib beramiz! 😊", reply_markup=add_btn)
+
+
+@handlers_router.message(F.text == "LEVEL1️⃣")
+async def level_1(message: Message):
+    question = (f"{random.randint(1, 11)} {random.choice(['+', '-', '*'])} {random.randint(1, 10)}")
+    await message.answer(text=f"SAVOL: {question} = ?", reply_markup=add_btns)
+
+
+@handlers_router.message(F.text == "LEVEL2️⃣")
+async def level_1(message: Message):
+    question = (f"{random.randint(11, 111)} {random.choice(['+', '-', '*'])} {random.randint(10, 100)}")
+    await message.answer(text=f"SAVOL: {question} = ?", reply_markup=add_btns)
+
+
+@handlers_router.message(F.text == "LEVEL3️⃣")
+async def level_1(message: Message):
+    question = (f"{random.randint(111, 1111)} {random.choice(['+', '-', '*', ':'])} {random.randint(100, 1000)}")
+    await message.answer(text=f"SAVOL: {question} = ?", reply_markup=add_btns)
+
+
+@handlers_router.message(F.text == "LEVEL4️⃣")
+async def level_1(message: Message):
+    question = (f"{random.randint(1111, 11111111)} {random.choice(['+', '-', '*', ':'])} {random.randint(1000, 1000000)}")
+    await message.answer(text=f"SAVOL: {question} = ?", reply_markup=add_btns)
+
+
+@handlers_router.message(F.text == "Stop⛔")
+async def command_start_handler(message: Message):
+    await message.answer(text="Stop⛔ ", reply_markup=add_btn),
+
