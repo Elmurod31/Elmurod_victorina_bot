@@ -17,5 +17,4 @@ add_btns = ReplyKeyboardMarkup(
     [
         KeyboardButton(text="Stop⛔")
     ]
-    ],resize_keyboard=True
-)
+    ],resize_keyboard=True)

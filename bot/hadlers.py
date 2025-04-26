@@ -6,8 +6,8 @@ from aiogram.filters import CommandStart, StateFilter
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message, FSInputFile
 
-from states import LevelState
 from keyboard import add_btn, add_btns
+from states import LevelState
 
 handlers_router = Router()
 
@@ -77,7 +77,9 @@ async def command_stop_handler(message: Message, state: FSMContext):
     total = correct + incorrect
 
     await message.answer(
-        text=f"Stop⛔\n"
+        text=f"Level {level}"
+             f"Stop⛔\n"
+             f"Level {level}\n"
              f"Savollar soni: {total}\n"
              f"✅ To'g'ri javoblar: {correct}\n"
              f"❌ Noto‘g‘ri javoblar: {incorrect}",
