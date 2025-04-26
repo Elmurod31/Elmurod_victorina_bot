@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from hadlers import handlers_router
 
 from aiogram.client.session.aiohttp import AiohttpSession
-session = AiohttpSession(proxy="https://proxy.server:3128")
+session = AiohttpSession(proxy="http://proxy.server:3128")
 
 load_dotenv()
 dp = Dispatcher()
